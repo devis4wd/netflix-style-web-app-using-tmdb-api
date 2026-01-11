@@ -1,0 +1,19 @@
+# --- Sensitive credentials ---
+config.php
+php/api_private_request.php
+
+# --- OS / editor junk ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Logs & cache ---
+*.log
+
+# --- XAMPP / local stuff ---
+.htaccess
+
+# --- Old static images (optional cleanup later) ---
+img/*.png
+img/*.jpg
