@@ -79,6 +79,36 @@ Fields:
 
 These fields match the registration and login system used by the app.
 
+--------------------------------------------------
+IMPORTANT: CONFIG FILES
+--------------------------------------------------
+
+For security reasons, this repository does NOT include real configuration files.
+
+Instead, it includes two template files:
+
+- config.example.php
+- php/api_private_request.example.php
+
+These files contain the correct structure and comments, but no private data.
+
+To run the project, you must create the real config files by copying them:
+
+1) In the project root:
+
+Copy  
+config.example.php → config.php  
+
+2) In the php/ folder:
+
+Copy  
+api_private_request.example.php → api_private_request.php  
+
+These two new files (config.php and api_private_request.php) are the ones actually used by the application.
+
+They are listed in .gitignore and will NOT be committed to GitHub.
+
+
 
 4) CONFIGURE DATABASE CONNECTION
 
