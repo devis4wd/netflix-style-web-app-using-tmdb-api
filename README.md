@@ -54,7 +54,7 @@ XAMPP, MAMP or similar stacks are fine.
 
 Clone the repository from GitHub and place it inside your local server folder, for example:
 
-xampp/htdocs/mindflix
+xampp/htdocs/fakeflix
 
 (or the equivalent for your local stack).
 
@@ -63,7 +63,7 @@ xampp/htdocs/mindflix
 
 Create a new MySQL database called:
 
-mindflix
+fakeflix
 
 Then create this table:
 
@@ -91,7 +91,7 @@ Set your local database credentials:
 DB_SERVER = localhost  
 DB_USERNAME = your database username  
 DB_PASSWORD = your database password  
-DB_NAME = mindflix  
+DB_NAME = fakeflix  
 
 
 5) ADD YOUR TMDB API KEY
@@ -118,7 +118,7 @@ Start Apache and MySQL.
 
 Then open in your browser:
 
-http://localhost/mindflix
+http://localhost/fakeflix
 
 You can now:
 - Register a user
