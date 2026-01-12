@@ -218,4 +218,7 @@ This prevents exposing private credentials in a public GitHub repository.
 - Email notifications on user actions  
 - Dynamic frontend rendering  
 - Handling different API structures (movies vs TV series)  
-- Real-world full-stack project structure  
+- Real-world full-stack project structure
+
+## Copyright
+This project is a personal, non-commercial educational exercise. All images, logos, and media belong to their respective copyright holders and are used here for demonstration purposes only
