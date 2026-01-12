@@ -1,23 +1,37 @@
 <?php
-//Riabilitare queste due righe per vedere errori se serve fare debugging
-//error_reporting(E_ALL);
-//ini_set('display_errors', 1);
+// Enable these only during local debugging
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 
-// session_start() va sempre all'inizio del codice PHP
+/*
+  logout.php
+
+  Purpose:
+  - Ends the current user session
+  - Removes all session data
+  - Redirects the user to the homepage
+*/
+
 session_start();
 
-//Resetta i valori di TUTTE le variabili superglobali salvate nella sessione corrente
-session_unset(); 
-//Termina completamente la sessione corrente, incluso il suo ID e i file di sessione sul server
-session_destroy(); 
+/*
+  Remove all session variables.
+*/
+session_unset();
 
-// Rimuovere anche cookie come pratica di sicurezza (se li hai creati)
+/*
+  Destroy the session completely, including the session ID
+  and any data stored on the server.
+*/
+session_destroy();
 
-//Una volta sloggato l'utente, riportami in Homepage:
-header('location: index.php');
+/*
+  Optional security hardening:
+  If you ever create custom cookies, they should be removed here as well.
+*/
 
-//Stoppiamo esecuzione del codice PH P dopo aver terminato sessione e reindirizzato l'utente.
-//In questo modo si evita che il codcie possa in qualche modo continuare ad essere eseguito casusando
-//possibili problemi o inconvenienti:
+/*
+  After logout, redirect the user to the homepage.
+*/
+header('Location: index.php');
 exit();
-
