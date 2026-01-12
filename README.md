@@ -3,14 +3,14 @@
 Netflix-style web app built with **PHP, JavaScript and MySQL**, powered by the **TMDB REST API**, featuring authentication, protected pages and dynamic movie & TV browsing.
 
 The project was created to explore:
-- REST API consumption
-- Backend proxying to protect API keys
-- User authentication with PHP + MySQL
-- Dynamic rendering of movies and TV series
-- Multi-page frontend architecture
+- REST API consumption  
+- Backend proxying to protect API keys  
+- User authentication with PHP + MySQL  
+- Dynamic rendering of movies and TV series  
+- Multi-page frontend architecture  
 
 This project runs locally (Apache + PHP + MySQL).  
-API keys and database credentials are not included for security reasons.
+API keys, database credentials and email credentials are not included for security reasons.
 
 ---
 
@@ -22,6 +22,7 @@ API keys and database credentials are not included for security reasons.
 - User authentication (sign up / login / logout)  
 - Protected pages (movies, tv series, details, settings)  
 - Backend proxy for TMDB API calls  
+- Email notifications on registration and login (via PHPMailer)  
 - Responsive UI built with Bootstrap  
 
 ---
@@ -33,6 +34,7 @@ API keys and database credentials are not included for security reasons.
 - MySQL  
 - Bootstrap  
 - TMDB REST API  
+- PHPMailer (email notifications)  
 
 ---
 
@@ -53,7 +55,7 @@ XAMPP, MAMP or similar stacks are fine.
 
 Clone the repository from GitHub and place it inside your local server folder, for example:
 
-xampp/htdocs/fakeflix
+xampp/htdocs/fakeflix  
 
 (or the equivalent for your local stack)
 
@@ -63,11 +65,11 @@ xampp/htdocs/fakeflix
 
 Create a new MySQL database called:
 
-fakeflix
+fakeflix  
 
 Then create this table:
 
-registered_users
+registered_users  
 
 Fields:
 - id (INT, auto-increment, primary key)  
@@ -112,7 +114,7 @@ They are listed in .gitignore and will **not** be committed to GitHub.
 
 Open the file:
 
-config.php
+config.php  
 
 Set your local database credentials:
 
@@ -131,18 +133,49 @@ php/api_private_request.php
 
 Find this line:
 
-$apiAuthKey = '[MY API KEY]';
+$apiAuthKey = '[MY API KEY]';  
 
 Replace it with:
 
-$apiAuthKey = 'api_key=YOUR_TMDB_API_KEY';
+$apiAuthKey = 'api_key=YOUR_TMDB_API_KEY';  
 
 You can get a free API key from:  
-https://www.themoviedb.org/settings/api
+https://www.themoviedb.org/settings/api  
 
 ---
 
-### 6. Run the project
+### 6. Install PHPMailer (email notifications)
+
+This project uses **PHPMailer** to send email notifications when:
+- a user completes registration  
+- a user successfully logs in  
+
+PHPMailer is **not included in this repository** and must be added locally.
+
+#### Step 1 — Download PHPMailer  
+Download PHPMailer from:  
+https://github.com/PHPMailer/PHPMailer  
+
+You only need the `src` folder or the classic `class.phpmailer.php` version.
+
+#### Step 2 — Add it to the project  
+Create this folder inside the project root:
+
+fakeflix/PHPMailer  
+
+Then place the PHPMailer files inside it, for example:
+
+fakeflix/PHPMailer/class.phpmailer.php  
+
+(or the equivalent files depending on the PHPMailer version you download)
+
+#### Step 3 — Configure email sending  
+The files `login.php` and `signup.php` use PHPMailer to send notification emails.  
+You may need to configure SMTP settings inside those files depending on your local environment or hosting provider.
+
+---
+
+### 7. Run the project
 
 Start Apache and MySQL.
 
@@ -161,12 +194,17 @@ You can now:
 
 ## Security note
 
-For security reasons, the TMDB API key and database credentials are **not** included in this repository.
+For security reasons, the following are **not** included in this repository:
+
+- TMDB API key  
+- Database credentials  
+- Email (SMTP) credentials  
 
 They must be added locally in:
 
 - php/api_private_request.php  
 - config.php  
+- (optional) PHPMailer configuration inside login.php and signup.php  
 
 This prevents exposing private credentials in a public GitHub repository.
 
@@ -177,6 +215,7 @@ This prevents exposing private credentials in a public GitHub repository.
 - REST API integration  
 - Backend proxying to protect API keys  
 - User authentication with PHP and MySQL  
+- Email notifications on user actions  
 - Dynamic frontend rendering  
 - Handling different API structures (movies vs TV series)  
 - Real-world full-stack project structure  
