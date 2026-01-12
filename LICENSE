@@ -1,3 +1,30 @@
+FakeFlix – License Notice
+
+This repository contains a personal, non-commercial educational project.
+
+The GNU General Public License v2.0 (GPL-2.0) applies ONLY to the source code
+written by the author of this project (PHP, JavaScript, HTML, CSS, etc.).
+
+All third-party assets — including but not limited to images, logos, posters,
+backdrops, video thumbnails, branding elements, and any other media —
+are NOT covered by this license.
+
+Those assets remain the property of their respective copyright holders
+and are used in this project strictly for:
+- educational purposes
+- non-commercial demonstration
+- UI/UX and development learning
+
+This project does not claim ownership of any third-party media and does not
+intend to compete with or replace any commercial streaming service.
+
+No commercial use is permitted for any third-party content included in this
+repository.
+
+---
+
+
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 2, June 1991
 
