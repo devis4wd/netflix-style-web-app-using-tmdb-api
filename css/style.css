@@ -1,39 +1,57 @@
 @charset "UTF-8";
 
+/* Global type scale (responsive) */
+:root {
+    /* Base */
+    --fs-body: clamp(1rem, 0.35vw + 0.95rem, 1.125rem);
 
+    /* Navigation */
+    --fs-nav: clamp(1rem, 0.25vw + 0.95rem, 1.125rem);
+
+    /* Hero / slider */
+    --fs-hero-title: clamp(1.9rem, 2.2vw + 1.1rem, 3.2rem);
+    --fs-hero-text: clamp(1.05rem, 0.9vw + 0.85rem, 1.6rem);
+
+    /* Details / headings */
+    --fs-h3: clamp(1.15rem, 0.65vw + 1rem, 1.55rem);
+    --fs-h4: clamp(1rem, 0.45vw + 0.9rem, 1.25rem);
+
+    /* Small text */
+    --fs-small: clamp(0.85rem, 0.25vw + 0.8rem, 0.95rem);
+}
 
 html {
-    scroll-behavior: smootheadead;
+    /* Fix typo: "smootheadead" -> "smooth" */
+    scroll-behavior: smooth;
+    font-size: 100%;
 }
 
 body {
-    font-size: 16px;
+    font-size: var(--fs-body);
 }
 
 header {
     z-index: 99;
 }
 
+/* These rules were redundant: headings/labels don't need text-decoration reset,
+   but keeping them doesn't hurt. If you want: delete this whole block. */
 h1,
 h2,
 h3,
-h4 {
-    text-decoration: none;
-}
-
+h4,
 input,
 label {
     text-decoration: none;
 }
-
 
 #mobile-navbar {
     display: none;
 }
 
 .nav-item a {
-    font-size: 1.1em;
-    transition: all 0.1s linear;
+    font-size: var(--fs-nav);
+    transition: transform 0.1s linear, color 0.1s linear;
 }
 
 .nav-item a:hover {
@@ -49,20 +67,23 @@ label {
     width: 0;
     padding: 0;
     border: none;
-    transition: all 0.3s ease-in-out;
+    transition: width 0.3s ease-in-out, padding 0.3s ease-in-out, border 0.3s ease-in-out;
     transform-origin: center right;
 }
 
 .search-input.src-active {
-    width: 230px;
-    padding: 3px 8px;
-    border: 1px solid #ffffff62;
+    width: clamp(10rem, 26vw, 14.375rem);
+    /* was 230px */
+    padding: 0.2rem 0.5rem;
+    /* was 3px 8px */
+    border: 0.0625rem solid #ffffff62;
+    /* was 1px */
 }
 
 #src-nav-button-desktop,
 #search-btn-mobile {
     background-color: transparent;
-    border: 1px solid #ffffff62;
+    border: 0.0625rem solid #ffffff62;
 }
 
 #src-nav-button-desktop svg,
@@ -74,7 +95,7 @@ label {
 
 #src-nav-button-desktop:hover,
 #search-btn-mobile:hover {
-    border: 1px solid #000;
+    border: 0.0625rem solid #000;
     background-color: #fff;
 }
 
@@ -87,18 +108,15 @@ nav .dropdown-item:hover {
     background-color: #212529;
 }
 
-nav .dropdown-item:hover a {
-    transform: none;
-}
-
+nav .dropdown-item:hover a,
 .dropdown-item a:hover {
     transform: none;
 }
 
-
-
+/* Navbar bell */
 .bell-link {
-    padding: 8px 16px 8px 24px !important;
+    padding: 0.5rem 1rem 0.5rem 1.5rem !important;
+    /* was 8px 16px 8px 24px */
 }
 
 .bell-link svg {
@@ -109,99 +127,70 @@ nav .dropdown-item:hover a {
     color: #fff;
 }
 
-/*Necessario impostare width del pulsante in modo che resti sempre uguale a dispetto
-del testo dinamico (php) che altrimenti "sballerebbe" la posizione del drop-down menu in 
-quanto la posizione di ques'ultimo è assoluta in rieferiemnto a questo bottone (relativo).
-Se cambia la larghezza del bottone in base al testo (login/no login, bomi utenti diversi
-il dropdown-menu non rimarrà mai correttaemnte allineato al bottone quando compare*/
+/* Keep a fixed width so the dropdown alignment does not shift with dynamic text */
 .dropdown-acc-button {
-    width: 100px;
+    width: clamp(5.5rem, 10vw, 6.25rem);
+    /* was 100px */
     background-color: transparent;
     border: none;
 }
 
-/* Selettore corretto per evitare che popper.js impedica al mio css di 
-correggere il layout di default di popper.js per il menù a tendinda 
-del menà di navigazione in modalità desktop: */
-/* .dropdown-menu.show {
-    top: 100%;
-    left: -80% !important;
-    right: 30%;
-    margin-top: var(--bs-dropdown-spacer);
-    width: 180px !important;
-    text-align: right;
-}
-
-.dropdown-menu.show .dropdown-item {
-    width: 100%;
-    padding: 6px 0;
-}
-
-.dropdown-menu.show li a {
-    padding: 0;
-    width: 100%;
-} */
-
-/* .slider-box video source {
-    width: 100vw;
-} */
-
+/* SLIDER */
 .slider {
     min-height: 90vh;
     width: 100vw;
     background-color: rgb(71, 71, 71);
+    overflow: hidden;
 }
 
-
-
 .slider iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
     min-height: 90vh;
-    /*position: relative già specificata con Bootstrap in html*/
+    border: 0;
 }
 
 .slider .card {
-    /*position: absolute già specificata con Bootstrap in html*/
     max-width: 30%;
-    /*  //probabilmente meglio mettere al 100% */
     background-color: transparent;
     border: none;
     top: 45%;
-    left: 5%
+    left: 5%;
 }
 
 .slider .card h1 {
-    font-size: 3em;
+    font-size: var(--fs-hero-title);
     text-transform: uppercase;
 }
 
 .slider .card p {
-    font-size: 1.5em;
+    font-size: var(--fs-hero-text);
 }
 
-
+/* Catalogue */
 .catalogue img {
     width: 100%;
-    transition: all 0.1s linear;
-    /*     height: 170px; */
-    /* questo perché immagini fornite hanno altezze diverse */
+    transition: transform 0.1s linear;
 }
 
 .catalogue a:hover img {
     transform: scale(1.04);
 }
 
+/* Footer */
 footer svg {
     color: #ffffff62;
     height: 1.8em;
     width: 1.8em;
-    transition: all 0.1s linear;
+    transition: transform 0.1s linear, color 0.1s linear;
 }
 
 footer a {
     display: block;
     color: #ffffff62;
     text-decoration: none;
-    transition: all 0.2s linear;
+    transition: color 0.2s linear, text-decoration 0.2s linear;
 }
 
 footer a:hover svg {
@@ -218,13 +207,10 @@ footer p {
     color: #ffffff62;
 }
 
-
-
 /* DETAILS PAGE */
-
 #dtl-page-slider {
     background-image: url();
-    /* url verrà aggiunto tramite JS in modo dinamico */
+    /* Set dynamically via JS */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -234,21 +220,16 @@ footer p {
 #dtl-page-slider::before {
     content: "";
     position: absolute;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background-color: #00000070;
 }
-
 
 #slider-detail-card {
     max-width: 45%;
     background-color: transparent;
-    /* metti transparent */
     border: none;
-    /* border-radius: 6px; */
-    /* togli */
     top: 50%;
-    left: 5%
+    left: 5%;
 }
 
 #details-title,
@@ -257,9 +238,18 @@ footer p {
     font-weight: 500;
 }
 
+#dtl-page-slider .card p {
+    font-size: var(--fs-body);
+    line-height: 1.45;
+}
+
+#details-cast {
+    font-size: var(--fs-small);
+    color: #ffffffd8;
+}
+
 
 /* LOGIN PAGE */
-
 .main {
     background: url(../img/login_background_opaque.jpg) no-repeat center;
     background-size: cover;
@@ -271,7 +261,8 @@ footer p {
     width: 25vw;
     height: 83vh;
     background-color: #000000a8;
-    border-radius: 8px;
+    border-radius: 0.5rem;
+    /* was 8px */
 }
 
 .form-container form {
@@ -279,7 +270,8 @@ footer p {
 }
 
 .form-container input:focus {
-    border: 2px solid #fff;
+    border: 0.125rem solid #fff;
+    /* was 2px */
 }
 
 #login-email.hide-form-element,
@@ -290,7 +282,7 @@ footer p {
 }
 
 .form-container button,
-.form-container a[type=button] {
+.form-container a[type="button"] {
     width: 100%;
     border: none;
     height: 2.5em;
@@ -307,12 +299,12 @@ footer p {
     background-color: #bb0b13;
 }
 
-.form-container a[type=button] {
+.form-container a[type="button"] {
     background-color: #ffffff3d;
 }
 
-.form-container a[type=button]:hover,
-.form-container a[type=button]:focus {
+.form-container a[type="button"]:hover,
+.form-container a[type="button"]:focus {
     background-color: #c4c4c43d;
 }
 
@@ -336,7 +328,7 @@ footer p {
 }
 
 .recapcha {
-    font-size: 0.8em;
+    font-size: var(--fs-small);
     color: #ffffff86;
     line-height: 1.3em;
     text-decoration: none;
@@ -351,31 +343,31 @@ footer p {
     display: none;
 }
 
-
 footer h5 {
     color: #ffffff94;
 }
 
-
-/*ACCOUNT SETTINGS PAGE - FIXME*/
+/* ACCOUNT SETTINGS PAGE */
 .back-icon-container {
-    padding: 5px;
-    /*  background-color: #fff; */
+    padding: 0.3125rem;
+    /* was 5px */
 }
 
 .nav-pills {
     width: 25%;
-    padding: 0 20px;
+    padding: 0 1.25rem;
+    /* was 0 20px */
 }
 
 .nav-pills .interactive-tab {
     color: #fff;
     border-radius: 0;
-    padding: 14px 5px;
+    padding: 0.875rem 0.3125rem;
+    /* was 14px 5px */
 }
 
-.nav-pills .interactive-tab:not(last) {
-    border-bottom: 1px solid #9b9ea1a9;
+.nav-pills .interactive-tab:not(:last-child) {
+    border-bottom: 0.0625rem solid #9b9ea1a9;
 }
 
 .nav-pills .interactive-tab:hover {
@@ -385,7 +377,6 @@ footer h5 {
 .nav-pills .interactive-tab.active {
     background-color: transparent;
 }
-
 
 .tab-content {
     width: 80%;
@@ -400,43 +391,45 @@ footer h5 {
     display: inline-block;
 }
 
+/* Arrow icon (mobile only) */
 .tab-pane.active i {
-    /* Non serve vedere l'icona a feccia in modalità desktop
-    ma solo in modalità mobile. Ma intanto ne definisco comunque
-    le proprietà di stile: */
     display: none;
-    /* Aggiunto io, togli se crea problemi */
     color: #fff;
-    font-size: 20px;
-    height: 20px;
-    width: 20px;
-    margin-bottom: 12px;
+    font-size: 1.25rem;
+    height: 1.25rem;
+    width: 1.25rem;
+    margin-bottom: 0.75rem;
 }
 
 #account-settings-view {
-    padding: 0 0 8px 0;
-    border-bottom: 1px solid #9b9ea1;
+    padding: 0 0 0.5rem 0;
+    /* was 0 0 8px 0 */
+    border-bottom: 0.0625rem solid #9b9ea1;
 }
 
 .tab-pane img {
     display: block;
-    width: 100px;
+    width: 6.25rem;
+    /* was 100px */
 }
 
 .sub-setting-box {
     width: 70%;
-    padding: 16px 0 16px 28px;
+    padding: 1rem 0 1rem 1.75rem;
+    /* was 16px 0 16px 28px */
 }
 
 .tab-pane h3 {
-    font-size: 1.5rem;
-    padding-bottom: 6px;
+    font-size: var(--fs-h3);
+    padding-bottom: 0.375rem;
+    /* was 6px */
 }
 
 .tab-pane h4 {
-    font-size: 1.2rem;
+    font-size: var(--fs-h4);
     color: #9b9ea1;
-    padding: 6px 0;
+    padding: 0.375rem 0;
+    /* was 6px 0 */
     margin: 0;
 }
 
@@ -448,17 +441,20 @@ footer h5 {
 .sub-setting-box .form-check {
     display: flex;
     flex-direction: row-reverse;
-    padding: 6px 0;
+    padding: 0.375rem 0;
+    /* was 6px 0 */
     padding-left: 0;
     justify-content: space-between;
 }
 
 .sub-setting-box .form-check label {
-    margin-right: 60px;
+    margin-right: 3.75rem;
+    /* was 60px */
 }
 
 .quick-dropdown-option {
-    padding: 6px 0;
+    padding: 0.375rem 0;
+    /* was 6px 0 */
     position: relative;
 }
 
@@ -471,7 +467,8 @@ footer h5 {
 .quick-dropdown-option .dropdown-menu.show {
     position: absolute;
     right: 0;
-    top: 5 !important;
+    top: 0.3125rem !important;
+    /* was 5 (invalid without unit) */
 }
 
 .tab-pane .left-side,
@@ -496,18 +493,15 @@ footer h5 {
     color: #fff;
 }
 
-
 .modal-list {
     list-style: none;
-    padding: 10px 0;
+    padding: 0.625rem 0;
+    /* was 10px 0 */
 }
 
 .modal-list li {
-    padding: 10px;
-}
-
-.modal-list li {
-    padding: 10px;
+    padding: 0.625rem;
+    /* was 10px */
 }
 
 .modal-list li:hover {
@@ -524,15 +518,18 @@ footer h5 {
 }
 
 .current-pay-metod {
-    margin: 16px 0;
-    padding: 10px;
-    border: 1px solid #9b9ea1;
+    margin: 1rem 0;
+    /* was 16px 0 */
+    padding: 0.625rem;
+    /* was 10px */
+    border: 0.0625rem solid #9b9ea1;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 0.625rem;
+    /* was 10px */
 }
 
 .current-pay-metod a {
-text-decoration: none;
+    text-decoration: none;
 }
 
 .add-payment-btn {
@@ -542,38 +539,38 @@ text-decoration: none;
 }
 
 .tab-pane .add-payment-btn i {
-    font-size: 16px;
+    font-size: 1rem;
+    /* was 16px */
     display: inline-block;
     color: #fff;
 }
 
+/* Responsive */
+@media (max-width: 100rem) {
 
-
-
-@media (max-width:1600px) {
-
-    /*Login Page*/
+    /* 1600px */
     .form-container {
         width: 35vw;
     }
 }
 
-@media (max-width:1024px) {
+@media (max-width: 64rem) {
 
+    /* 1024px */
     .slider .card {
         max-width: 50%;
         top: 45%;
-        left: 5%
+        left: 5%;
     }
 
-    /*Login Page*/
     .form-container {
         width: 45vw;
     }
 }
 
-@media (max-width:990px) {
+@media (max-width: 61.875rem) {
 
+    /* 990px */
     #desktop-navbar {
         display: none;
     }
@@ -585,103 +582,30 @@ text-decoration: none;
     .bell-link {
         display: none;
     }
-
-    /* 
-    .dropdown-acc-button {
-        margin-left: auto;
-    }
-
-    .dropdown-acc-button:hover,
-    .dropdown-acc-button.show {
-        background-color: transparent;
-    }
-
-    .navbar-nav li:nth-of-type(3) {
-        display: flex;
-        justify-content: end;
-        align-items: end;
-    }
-
-    .dropdown-menu.show {
-        position: absolute;
-        top: 100%;
-        left: -80% !important;
-        right: 30%;
-        margin-top: var(--bs-dropdown-spacer);
-        width: 180px !important;
-        text-align: right;
-        border: none;
-    } 
-
-    .dropdown-menu.show .dropdown-item {
-        width: 100%;
-        padding: 6px 0;
-    }
-
-    .dropdown-menu.show li a {
-        padding: 0;
-        width: 100%;
-    }
-*/
-
-    /* Effetti per ordinare menù di navigazione solo quando Bootstrap
-    applica al menu di navigazione mobile la classe 'show' per rendere 
-    il menù visibile e solo fino al viewport in cui usermeo il menù mobile 
-    (990px, appunto), così da lasciare il menù desktop intatto: 
-    .navbar-collapse.show {
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: end !important;
-        align-items: end;
-    }
-
-    .navbar-collapse.show ul.navbar-nav {
-        margin-right: 0 !important;
-         order: 1 !important;
-        margin: 0 0 10px 0 !important;
-
-    }
-
-    .navbar-collapse.show form.search-bar {
-         order: 0 !important;
-        width: 100%;
-        justify-content: end;
-        margin: 20px 0 10px 0 !important;
-    }
-
-    .search-input.src-active {
-        width: 100%;
-    }
-*/
-
-
 }
 
-@media (max-width:800px) {
+@media (max-width: 50rem) {
 
+    /* 800px */
     .slider .card {
         max-width: 60%;
         top: 40%;
-        left: 5%
+        left: 5%;
     }
 
-    /*Login Page*/
     .form-container {
         width: 60vw;
     }
 }
 
-@media (max-width:600px) {
+@media (max-width: 37.5rem) {
 
+    /* 600px */
     .slider .card {
         max-width: 90%;
         top: 35%;
-        left: 5%
+        left: 5%;
     }
-
-    /*     .slider-box .card {
-        max-width: 70vw;
-    } */
 
     /* Details page */
     #slider-detail-card {
@@ -689,37 +613,29 @@ text-decoration: none;
         background-color: transparent;
         border: none;
         top: 30%;
-        left: 3%
+        left: 3%;
     }
 
-    /*Login Page*/
+    /* Login page */
     .form-container {
         width: 90vw;
     }
 
-
-    /*Account settings page per schermi MOBILE*/
-
+    /* Account settings - mobile */
     .sub-setting-box {
         width: 100%;
-        padding: 16px 0 16px 10px;
-    }
-
-    .sub-setting-box .form-check {
-        display: flex;
-        flex-direction: row-reverse;
-        padding: 6px 0;
-        padding-left: 0;
-        justify-content: space-between;
+        padding: 1rem 0 1rem 0.625rem;
+        /* was 16px 0 16px 10px */
     }
 
     #account-settings-view {
-        padding: 15px 0 10px 0;
+        padding: 0.9375rem 0 0.625rem 0;
+        /* was 15px 0 10px 0 */
     }
 
     .tab-pane img {
-        display: block;
-        width: 60px;
+        width: 3.75rem;
+        /* was 60px */
     }
 
     .tab-pane .right-side .modal.show .modal-dialog {
@@ -729,104 +645,47 @@ text-decoration: none;
         margin: 0;
     }
 
+    /* Mobile settings UX:
+       Start by showing only the left menu (.nav-pills).
+       When a tab is selected, JS hides .nav-pills and reveals .tab-content. */
 
-    /*SPIEGAZIONE DELLA SOLUZIONE SMART QUI SOTTO
-    
-    Obiettivo: voglio nella pagina settings si veda inizialmente solo la parte di menù con le
-    varie tab (ovvero la parte di HTML contenuta in .nav-pills), e che quando clicco su una
-    voce del menù, quest'ultimo scompaia lasciando il posto alle sotto-impostazioni per 
-    quella specifica voce di menù (contenute nei vari .tab-pane, a loro volta contenuti nella
-    parte .tab-content del menù di questa pagina)
-
-    Come l'ho realizzato (anche grazie a ChatGPT per la parte CSS):
-    - impostata larghezza iniziale per .nav-pills (menù con varie voci) a 100%
-    - L'intera parte della pagina contenuta in .tab-content è invece inizialmente nascosta. 
-      TUTTAVIA: non ho usato display:none per farlo, perché questo mi avrebbe impedito di applicare
-      effetti di transizione (che non funzionano con la proprietà display). E non ho nemmeno usato la proprietà
-      visibility, in quanto non mi avrebbe permesso di rimuovere dal flusso di layout l'elemento .tab-content, che 
-      avrebbe continuato a occupare dello spazio anche con witdth a zero e opacity a 0, rovinando il layout.
-      E quindi ho fatto così:
-      A)ho dato a .tab-content position: absolute e width 100% (= non interferisce più con il 
-        layout della pagina ma resta comunque lì
-      B)a quel punto ho dato a .tab-content (che contiene un'icona arrow e un div sub-setting-box) E ANCHE A 
-        al div .sub-setting-box in esso conteunuto un opacity:0 (per poter gestire meglio gli effetti di transizione
-        che ho applicato. In questo modo, tutto l'elemento resta lì, ma con queste impstazioni non si vede 
-        e non interferisce con il menù .nav-pills ancora visibile perché ne ho disabilitato anche la possibilità
-        di interazione e di clicl con pointers-events: none!
-    - a questo punto, ho usato JS per fare in modo che:
-      A) quando clicco su una delle voci del menù, viene applicata la classe .hidden
-      (che applica display:none) all'intero menù .tab-content e applica invece la classe .grow a .tab-content,
-      riportantone l'opacità a 1 (l'icona freccia torna visibile) e riportando anche l'opacità
-      di .sub-setting-box a 1 (tramite selettore tab-content.grow .sub-setting-box). L'opacità
-      è stata gestia separatamente per .tab-content e .sub-setting-box perché in questo modo ho 
-      gestito le transizioni dei due elementi in modo diverso, rendendo possibile far apparire
-      l'icona della freccai un pò prima di tutte le voci di inpostazioni contenute in .sub-setting-box
-      B) quando clicco invece sull'icona a freccia, JS rimuove le classi .hidden e .grow applicate, 
-        ripristinando la situazione originale e rendendo visibile il solo menù delle impostazioni (.nav-pills)
-    */
-
-    /*Si parte con le tab di menù selezionabili al 100% di default*/
     .nav-pills {
         width: 100%;
-        padding: 0 18px;
+        padding: 0 1.125rem;
+        /* was 0 18px */
     }
 
-    /* Quanfo clicco una voce di menù, JS applica questa classe e il menù scompare: */
     .nav-pills.hidden {
         display: none;
     }
 
-    /* La parte della pagina contenente le varie impostazioni è inizialmente nascosta in questo modo: */
     .tab-content {
         opacity: 0;
-        /* elementi non visibili */
         position: absolute;
-        /* rimuove da flusso layout, si posiziona di default in alto a sx */
         width: 100%;
-        /* lascio width a 100%, anche se elemento copre tutta pagina, ma dato che è absolute non 
-                       interferirà con layout ed essendo non visibile (opacity 0) non darà nessun fastidio/interferenza*/
         height: auto;
-        /* Il container potrà adattarsi alla dimensione del contenuto */
         transition: none;
-        /*Non mi interessano animazioni per quando appare la freccia*/
         pointer-events: none;
-        /* Disabilita l'interazione mentre è invisibile!! */
     }
-
-    /*Applico opacity 0 anche a contenuti di questo div che contiene di fatto i vari input e labels
-    dei sottomenù e in questo caso imposto animazione per ritardare un pò l'apparizione dei sottomenu
-    rispetto all'apparizione dell'intero .tab-content e dell'icona a freccia*/
 
     .sub-setting-box {
         opacity: 0;
         transition: opacity 1s ease-in-out;
-        /* Transizione per i contenuti interni */
     }
 
-    /* Quando la tab è stata cliccata e quindi è attiva, JS aggiunge classe grow a intero .tab-content
-    in modo da farlo riapparire, ripriostinandone anche il flusso in layout con position:relative (contestualmente,
-    JS applicherà la classe .hidden a .nav-pills facendolo scomparire) */
     .tab-content.grow {
         width: 100%;
         opacity: 1;
-        /* Rendi il contenuto visibile */
         position: relative;
-        /* Ripristina il flusso del layout */
         pointer-events: auto;
-        /* Rendi nuovamente interattivo e cliccabile il contenuto!! */
     }
 
-    /*Quando .tab-pane è stato selezionato (ha classe .active applicata) rendi visibile anche la icona
-    a freccia per tornare al menù:*/
     .tab-pane.active i {
         display: block;
     }
 
-    /*Quando JS applica classe .grow a .tab-content, ripristina opacity:1 anche a .sub-setting-box
-    permettendo al suo contenuto di tornare visibile con i tempi di animazione impostati sopra*/
     .tab-content.grow .sub-setting-box {
         opacity: 1;
-        /* Rendi visibile il contenuto */
     }
 
     .sub-setting-box .form-check {
