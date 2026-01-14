@@ -334,6 +334,10 @@ footer p {
     text-decoration: none;
 }
 
+.recapcha a {
+    display: inline-block; 
+}
+
 .terms-link {
     text-decoration: none;
 }
