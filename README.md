@@ -216,7 +216,7 @@ This prevents exposing private credentials in a public GitHub repository.
 - Backend proxying to protect API keys  
 - User authentication with PHP and MySQL  
 - Email notifications on user actions  
-- Dynamic frontend rendering  
+- Dynamic and responsive frontend rendering  
 - Handling different API structures (movies vs TV series)  
 - Real-world full-stack project structure
 
