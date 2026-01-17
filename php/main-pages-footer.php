@@ -60,7 +60,7 @@
 
     <div class="row mt-5">
         <div class="col mx-auto text-center py-2">
-            <p>© 1997-2006 FakeFlix, Inc. - Educational project (non-commercial).</p>
+            <p>© 1997-2026 FakeFlix, Inc. - Educational project (non-commercial).</p>
             <p>This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
         </div>
     </div>
